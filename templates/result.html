@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Include the CSS file for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+
+
+</head>
+<body>
+    <header>
+        <!-- Navigation bar -->
+        <nav class="light-blue lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+                <!-- Logo and navigation links -->
+                <a id="logo-container" href="#" class="brand-logo">Cyber Attack Detection</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row result-container">
+                    <div class="col s12">
+                        <!-- Header for the prediction result section -->
+                        <h1 class="header center orange-text">Prediction Result</h1>
+                        <!-- Container for displaying the prediction message -->
+                        <div class="result-message">
+                            {{ prediction }}
+                        </div>
+                        <!-- Suggestions based on predicted traffic type -->
+                        {% if predicted_traffic_type == 'DoS' %}
+                            <h2>Suggestions:</h2>
+                            <ul>
+                                <p>You can perform any one of these following remedies to reduce/remove the DoS traffic :</p>
+
+                                <li>DDoS Mitigation Services: Consider subscribing to DDoS mitigation services offered by third-party providers. These services specialize in detecting and mitigating large-scale DDoS attacks before they reach your network.</li>
+
+                                <li>Update Software and Firmware: Ensure that your device's software and firmware are up-to-date with the latest security patches. Vulnerabilities in outdated software can be exploited by attackers to launch DoS attacks.</li>
+
+                                <li>Use Firewalls: Deploy firewalls to inspect and filter both incoming and outgoing traffic. Configure the firewall rules to block traffic from suspicious or known malicious sources.</li>
+
+                                <li>Implement Network Filtering: Configure your network devices to filter incoming traffic based on known attack signatures. This can help block malicious traffic before it reaches your device.</li>
+
+                                <li>Rate Limiting: Implement rate-limiting measures to restrict the amount of incoming traffic from individual sources. This can prevent a single attacker from overwhelming your device with a flood of requests.</li>
+
+                                <li>Intrusion Detection/Prevention Systems (IDS/IPS): Install IDS/IPS systems to detect and block suspicious network activity in real-time. These systems can help identify and mitigate DoS attacks before they cause significant damage.</li>
+                                <!-- Include other suggestions for DoS -->
+                            </ul>
+                        {% elif predicted_traffic_type == 'normal' %}
+                            <h2>Suggestions:</h2>
+                            <ul>
+                                <li>Your device is in safe condition!</li>
+                        {% elif predicted_traffic_type == 'Backdoor' %}
+                            <h2>Suggestions:</h2>
+                            <ul>
+                                <p>You can perform any one of these following remedies to reduce/remove the Backdoor traffic :</p>
+
+                                <li> Identify and Locate the Backdoor: Use security tools such as intrusion detection systems (IDS), antivirus software, or network monitoring tools to identify the presence and location of the backdoor on your device or network.</li>
+
+                                <li>Disable Remote Access: If the backdoor provides remote access to your device, immediately disable remote access services or close any open ports that are being used by the backdoor. This will prevent unauthorized access to your system.</li>
+
+                                <li>  Terminate Suspicious Processes: Use task managers or process monitoring tools to identify and terminate any suspicious processes or applications that may be associated with the backdoor. Look for processes with unusual names or behavior.</li>
+
+                                <li>  Remove Malicious Files: Delete any files or scripts associated with the backdoor from your device. This may include executable files, scripts, configuration files, or registry entries that are used to maintain persistence on your system.</li>
+
+                                <li>Change Credentials: If the backdoor was installed through compromised credentials, change all passwords and access credentials associated with your device, including administrative passwords, SSH keys, and API tokens. Use strong, unique passwords to prevent unauthorized access.</li>
+
+                                <li>Perform Security Audits: Conduct regular security audits and vulnerability assessments to identify and address any weaknesses or misconfigurations in your device's security posture. This can help prevent future backdoor infections and security breaches.
+                                    </li>
+                                <!-- Include other suggestions for backdoor -->
+                            </ul>
+                        {% elif predicted_traffic_type == 'CommInj' %}
+                            <h2>Suggestions:</h2>
+                            <ul>
+                                <p>You can perform any one of these following remedies to reduce/remove the Command Injection traffic :</p>
+
+                                <li>Input Validation and Sanitization: Implement strict input validation and sanitization mechanisms to filter out potentially malicious characters or commands from user inputs. Use whitelisting techniques to only allow known safe characters and patterns.</li>
+
+                                <li>Use Parameterized Queries: If your device interacts with databases, use parameterized queries or prepared statements instead of concatenating user inputs directly into SQL queries. This can prevent SQL injection attacks, which often involve command injection as well.</li>
+
+                                <li>Avoid Shell Execution: Minimize the use of shell commands or system calls that involve user input. If shell commands are necessary, sanitize and validate all user inputs before executing them.</li>
+
+                                <li>Web Application Firewalls (WAF): Deploy a WAF to inspect and filter HTTP requests for malicious patterns, including command injection attempts. Configure the WAF to block or sanitize any requests that contain suspicious payloads.</li>
+
+                                <li>Update and Patch Software: Keep your device's software, including operating systems, web servers, and applications, up-to-date with the latest security patches. Command injection vulnerabilities are often patched in software updates.</li>
+                                <!-- Include other suggestions for command injection -->
+                            </ul>
+                        {% elif predicted_traffic_type == 'Reconn' %}
+                            <h2>Suggestions:</h2>
+                            <ul>
+                                <p>You can perform any one of these following remedies to reduce/remove the reconnaissance:</p>
+
+                                <li>Network Segmentation: Segment your network to limit the visibility of critical assets and services. By compartmentalizing your network, you reduce the likelihood that an attacker can map out your entire infrastructure during reconnaissance.</li>
+
+                                <li>Firewalls and Access Controls: Deploy firewalls to filter incoming and outgoing traffic. Configure access control lists (ACLs) to restrict access to sensitive services and resources, and block suspicious IP addresses or ranges identified during reconnaissance.</li>
+
+                                <li>Intrusion Detection Systems (IDS): Implement IDS sensors to monitor network traffic for suspicious patterns indicative of reconnaissance activities, such as port scanning or enumeration of services. Configure IDS rules to generate alerts or block traffic associated with reconnaissance.</li>
+
+                                <li>Web Application Firewalls (WAF): Use WAFs to inspect and filter incoming HTTP requests for reconnaissance activities, such as directory traversal attempts or SQL injection probes. Configure WAF rules to block or alert on suspicious web traffic.</li>
+
+                                <li>Monitor Logs and Traffic: Continuously monitor logs and network traffic for signs of reconnaissance, such as sequential scanning of ports or brute-force attempts against authentication mechanisms. Look for patterns indicative of automated scanning tools.</li>
+                                <!-- Include other suggestions for reconnaissance -->
+                            </ul>
+                        {% endif %}
+                        <!-- Button to go back to the home page -->
+                        <a href="{{ url_for('home') }}" class="btn-large waves-effect waves-light orange">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

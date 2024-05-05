@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyber Attack Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mainpage.css') }}">
+</head>
+<body>
+    <header>
+        <!-- Navigation bar -->
+        <nav class="light-blue lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+                <!-- Logo and navigation links -->
+                <a id="logo-container" href="#" class="brand-logo">Cyber Attack Detection</a>
+            </div>
+        </nav>
+    </header>
+    <p>Do You want to check whether your device is prone to any cyber attack? Come let's do it together!!</p>
+
+    <div class="form-container">
+        <p>Please fill the following values of your device:</p>
+        <p>Don't know how to find these values? <a href="toknowinputs.html" target="_blank">Click here to know</a>
+
+
+        <form id="prediction-form" method="post" action="/predict"> <!-- Add the form tag -->
+        <div class="input-container">
+            <div class="column">
+                <label for="mean">Mean</label>
+                <input type="text" id="mean" name="mean" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="destination-port">Destination Port</label>
+                <input type="text" id="destination-port" name="destination-port" pattern="^\d+$" required>
+
+                <label for="source-packets">Source Packets</label>
+                <input type="text" id="source-packets" name="source-packets" pattern="^\d+$" required>
+
+                <label for="destination-packets">Destination Packets</label>
+                <input type="text" id="destination-packets" name="destination-packets" pattern="^\d+$" required>
+
+                <label for="total-packets">Total Packets</label>
+                <input type="text" id="total-packets" name="total-packets" pattern="^\d+$" required>
+
+                <label for="destination-bytes">Destination Bytes</label>
+                <input type="text" id="destination-bytes" name="destination-bytes" pattern="^\d+$" required>
+
+                <label for="source-bytes">Source Bytes</label>
+                <input type="text" id="source-bytes" name="source-bytes" pattern="^\d+$" required>
+
+                <label for="total-bytes">Total Bytes</label>
+                <input type="text" id="total-bytes" name="total-bytes" pattern="^\d+$" required>
+
+                <label for="source-load">Source Load</label>
+                <input type="text" id="source-load" name="source-load" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+            </div>
+
+            <div class="column">
+                <label for="destination-load">Destination Load</label>
+                <input type="text" id="destination-load" name="destination-load" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="load">Load</label>
+                <input type="text" id="load" name="load" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="source-rate">Source Rate</label>
+                <input type="text" id="source-rate" name="source-rate" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="destination-rate">Destination Rate</label>
+                <input type="text" id="destination-rate" name="destination-rate" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="rate">Rate</label>
+                <input type="text" id="rate" name="rate" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="source-loss">Source Loss</label>
+                <input type="text" id="source-loss" name="source-loss" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="destination-loss">Destination Loss</label>
+                <input type="text" id="destination-loss" name="destination-loss" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="loss">Loss</label>
+                <input type="text" id="loss" name="loss" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+
+                <label for="percentage-loss">Percentage Loss</label>
+                <input type="text" id="percentage-loss" name="percentage-loss" pattern="^(\d+(\.\d+)?|(\.\d+))$" required>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row center">
+        <button type="submit" class="btn-large waves-effect waves-light orange">Submit</button>
+    </div>
+  </form>
+  <!-- Form end -->
+</div>
+
+<!-- JavaScript to redirect to result.html
+<script>
+  // Get the form element by its ID
+  const predictionForm = document.getElementById('prediction-form');
+
+  // Add an event listener to the form submission
+  predictionForm.addEventListener('submit', function(event) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Redirect to result.html
+      window.location.href = '/result.html';
+  });
+</script> -->
+</body>
+</html>

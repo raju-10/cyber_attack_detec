@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How to Find Input Values of Your Device</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='inputspage.css') }}">
+
+</head>
+<body>
+    <h1>How to Find Input Values of Your Device</h1>
+
+    <h2>Perform the following steps:</h2>
+    <ol>
+        <li>
+            <h3>Install Wireshark</h3>
+            <p>Wireshark is a powerful network protocol analyzer that can provide most of the information you need. You can download and install the latest version of Wireshark from their official website (<a href="https://www.wireshark.org/download.html" target="_blank">https://www.wireshark.org/download.html</a>).</p>
+        </li>
+        <li>
+            <h3>Start Wireshark and capture traffic</h3>
+            <p>After installing Wireshark, open the application and start capturing packets by selecting the appropriate network interface (usually the Wi-Fi or Ethernet interface). You can choose to capture traffic for a specific duration or continuously.</p>
+        </li>
+        <li>
+            <h3>Analyze the captured traffic</h3>
+            <p>Once you have captured the desired traffic, you can use the following methods to find the properties you need:</p>
+            <ul>
+                <li>
+                    <h4>Mean flow (mean)</h4>
+                    <p>In Wireshark, go to "Statistics" &gt; "Conversations" and select the "TCP" tab. You can see the duration of each flow, and you can export the list as CSV file using the copy option to calculate the average duration manually. To calculate Mean of 'duration' you can use following ways:</p>
+                    <ol>
+                        <li>
+                            <p>Create a python notebook &rarr; Upload CSV file into it &rarr; Now run the following code to get the 'mean of duration'.</p>
+                            <pre>import pandas as pd
+
+# Read the CSV file into a pandas DataFrame
+df = pd.read_csv('myfile.csv')
+
+# Calculate the average of the "duration" column
+average_duration = df['duration'].mean()
+
+print("Average duration:", average_duration)</pre>
+                        </li>
+                        <li>
+                            <p>You can manually calculate the average of the values of the column 'duration' using the formula:</p>
+                            <pre>mean = Sum of all durations/no of durations = d1+d2+d3+...,/n</pre>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <h4>Destination Port (Dport)</h4>
+                    <p>In the main Wireshark window, you can see the destination port (port B) number for each packet.</p>
+                </li>
+                <li>
+                    <h4>Source Packets (Spkts)</h4>
+                    <p>Go to "Statistics" &gt; "Conversations" to see the Packets sent from source to destination (A&rarr;B).</p>
+                </li>
+                <li>
+                    <h4>Destination Packets (Dpkts)</h4>
+                    <p>Go to "Statistics" &gt; "Conversations" to see the Packets sent from destination to source (B&rarr;A).</p>
+                </li>
+                <li>
+                    <h4>Total Packets (Tpkts)</h4>
+                    <p>Sum of 'Spkts and Dpkts' = Source Packets + Destination Packets.</p>
+                </li>
+                <li>
+                    <h4>Destination Bytes (Dbytes)</h4>
+                    <p>Go to "Statistics" &gt; "Conversations" to see the number of bytes sent from destination to source (B&rarr;A).</p>
+                </li>
+                <li>
+                    <h4>Source Bytes (Sbytes)</h4>
+                    <p>Go to "Statistics" &gt; "Conversations" to see the number of bytes sent from source to destination (A&rarr;B).</p>
+                </li>
+                <li>
+                    <h4>Total Bytes (TBytes)</h4>
+                    <p>Sum of 'Dpkts and Spkts' = Destination Packets + Source Packets.</p>
+                </li>
+                <li>
+                    <h4>Source Load (Sload)</h4>
+                    <p>Sload = (Source Bytes * 8) / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Destination Load (Dload)</h4>
+                    <p>Dload = (Destination Bytes * 8) / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Total Load (Tload)</h4>
+                    <p>Tload = (Total Bytes * 8) / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Source Rate (Srate)</h4>
+                    <p>Srate = Source Packets / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Destination Rate (Drate)</h4>
+                    <p>Drate = Destination Packets / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Total Rate (Trate)</h4>
+                    <p>Trate = Total Packets / Capture Duration (in seconds).</p>
+                </li>
+                <li>
+                    <h4>Source Loss (Sloss)</h4>
+                    <p>Go to "Analyze" &gt; "Expert Information" and look for the count of 'retransmissioned' packets under "Group" Category of TCP Protocol. If there is no 'rentransmitted group' then it implies that there are no retransmitted packets (Sloss = 0).</p>
+                </li>
+                <li>
+                    <h4>Destination Loss (Dloss)</h4>
+                    <p>Go to "Analyze" &gt; "Expert Information" and look for the count of 'Out of Order' packets under "Group" Category of TCP Protocol. If there is no 'Out of Order group' then it implies that there are no out of order transmissioned packets (Dloss = 0).</p>
+                </li>
+                <li>
+                    <h4>Total Loss (Tloss)</h4>
+                    <p>Tloss = Source Loss + Destination Loss.</p>
+                </li>
+                <li>
+                    <h4>Total Percent Loss (Ploss)</h4>
+                    <p>Ploss = (Total Loss / Total Packets) * 100.</p>
+                </li>
+            </ul>
+        </li>
+    </ol>
+</body>
+</html>
