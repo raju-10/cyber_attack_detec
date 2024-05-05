@@ -57,4 +57,4 @@ def result():
     # Render the result template with the prediction
     return render_template('result.html', prediction=f'The predicted traffic type is: {predicted_traffic_type}', predicted_traffic_type= predicted_traffic_type)
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0')
+    app.run(host='0.0.0.0',port=8080)
